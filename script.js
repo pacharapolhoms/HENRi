@@ -9,15 +9,22 @@ function getAge() {
   const hasBirthdayPassed =
     today.getMonth() > dob.getMonth() ||
     (today.getMonth() === dob.getMonth() && today.getDate() >= dob.getDate());
+
   if (!hasBirthdayPassed) age -= 1;
   return age;
 }
 
 function setLanguage(lang) {
+  const nextLang = lang === 'en' ? 'en' : 'th';
   root.classList.remove('lang-th', 'lang-en');
-  root.classList.add(`lang-${lang}`);
-  localStorage.setItem('henri-lang', lang);
-  if (toggle) toggle.textContent = lang === 'th' ? 'TH / EN' : 'EN / TH';
+  root.classList.add(`lang-${nextLang}`);
+  root.setAttribute('lang', nextLang);
+  localStorage.setItem('henri-lang', nextLang);
+
+  if (toggle) {
+    toggle.textContent = nextLang === 'th' ? 'ไทย / EN' : 'TH / English';
+    toggle.setAttribute('aria-label', nextLang === 'th' ? 'สลับภาษาเป็น English' : 'Switch language to Thai');
+  }
 }
 
 function populateAge() {
@@ -29,10 +36,8 @@ function populateAge() {
 }
 
 populateAge();
-const stored = localStorage.getItem('henri-lang') || 'th';
-setLanguage(stored);
+setLanguage(localStorage.getItem('henri-lang') || 'th');
 
 toggle?.addEventListener('click', () => {
-  const isThai = root.classList.contains('lang-th');
-  setLanguage(isThai ? 'en' : 'th');
+  setLanguage(root.classList.contains('lang-th') ? 'en' : 'th');
 });
