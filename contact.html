@@ -39,7 +39,21 @@
       <div class="container">
         <h2 data-lang="th">ส่งข้อความถึงเรา</h2>
         <h2 data-lang="en">Send us a message</h2>
-        <form data-contact-form>
+        <form
+          data-contact-form
+          action="https://formsubmit.co/henritradingplus@gmail.com"
+          method="POST"
+        >
+          <input type="hidden" name="_subject" value="HENRi Website Contact" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_next" value="thank-you.html" />
+
+          <label class="hp-field" aria-hidden="true">
+            <span>Website</span>
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
+          </label>
+
           <label>
             <span data-lang="th">ชื่อ</span>
             <span data-lang="en">Name</span>
@@ -55,11 +69,11 @@
             <span data-lang="en">Message</span>
             <textarea name="message" rows="5" required></textarea>
           </label>
-          <button class="btn primary" type="submit" data-lang="th">ส่งข้อความทางอีเมล</button>
-          <button class="btn primary" type="submit" data-lang="en">Send via Email</button>
+          <button class="btn primary" type="submit" data-lang="th">ส่งข้อความ</button>
+          <button class="btn primary" type="submit" data-lang="en">Submit</button>
         </form>
-        <p class="form-note" data-contact-status data-lang="th">เมื่อกดส่ง ระบบจะเปิดแอปอีเมลพร้อมข้อความร่างอัตโนมัติ</p>
-        <p class="form-note" data-contact-status data-lang="en">Submitting opens your email app with a pre-filled message draft.</p>
+        <p class="form-note" data-contact-status data-lang="th">เมื่อกดส่ง ข้อความจะถูกส่งตรงไปยังอีเมลร้านโดยไม่เปิดแอปอีเมลของคุณ</p>
+        <p class="form-note" data-contact-status data-lang="en">When submitted, your message is sent directly to our inbox without opening your email app.</p>
       </div>
     </section>
   </main>

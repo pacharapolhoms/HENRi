@@ -43,40 +43,59 @@ function setActiveNav() {
   navLinks.forEach((link) => {
     const active = link.getAttribute('href') === path;
     link.classList.toggle('is-active', active);
-    if (active) link.setAttribute('aria-current', 'page');
+    if (active) {
+      link.setAttribute('aria-current', 'page');
+    } else {
+      link.removeAttribute('aria-current');
+    }
+  });
+}
+
+function setContactStatus(message) {
+  contactStatuses.forEach((node) => {
+    node.textContent = message;
   });
 }
 
 function initContactForm() {
   if (!contactForm || !contactStatuses.length) return;
 
+  const honeypot = contactForm.querySelector('input[name="_honey"]');
+  const emailInput = contactForm.querySelector('input[name="email"]');
+
   contactForm.addEventListener('submit', (event) => {
-    event.preventDefault();
     const formData = new FormData(contactForm);
     const name = String(formData.get('name') || '').trim();
     const email = String(formData.get('email') || '').trim();
     const message = String(formData.get('message') || '').trim();
 
-    if (!name || !email || !message) {
-      const statusMessage = root.classList.contains('lang-th')
-        ? 'กรุณากรอกข้อมูลให้ครบก่อนส่งข้อความ'
-        : 'Please complete all fields before sending.';
-      contactStatuses.forEach((node) => {
-        node.textContent = statusMessage;
-      });
+    const invalidEmail = !emailInput || !emailInput.checkValidity();
+
+    if (!name || !email || invalidEmail || !message) {
+      event.preventDefault();
+      setContactStatus(
+        root.classList.contains('lang-th')
+          ? 'กรุณากรอกชื่อ อีเมลที่ถูกต้อง และข้อความให้ครบก่อนส่ง'
+          : 'Please complete name, valid email, and message before submitting.'
+      );
       return;
     }
 
-    const subject = encodeURIComponent(`HENRi Contact — ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-    window.location.href = `mailto:henritradingplus@gmail.com?subject=${subject}&body=${body}`;
+    if (honeypot && String(honeypot.value || '').trim()) {
+      event.preventDefault();
+      setContactStatus(
+        root.classList.contains('lang-th')
+          ? 'ไม่สามารถส่งข้อความได้ กรุณาลองใหม่อีกครั้ง'
+          : 'Unable to submit. Please try again.'
+      );
+      return;
+    }
 
-    const statusMessage = root.classList.contains('lang-th')
-      ? 'ระบบได้เปิดอีเมลเพื่อส่งข้อความเรียบร้อยแล้ว'
-      : 'Your email app has been opened with your message draft.';
-    contactStatuses.forEach((node) => {
-      node.textContent = statusMessage;
-    });
+    setContactStatus(
+      root.classList.contains('lang-th')
+        ? 'กำลังส่งข้อความ...'
+        : 'Sending your message...'
+    );
   });
 }
 
