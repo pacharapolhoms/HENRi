@@ -4,6 +4,8 @@ const ageTargets = document.querySelectorAll('[data-age]');
 const navLinks = document.querySelectorAll('nav a');
 const contactForm = document.querySelector('[data-contact-form]');
 const contactStatuses = document.querySelectorAll('[data-contact-status]');
+const textureLayer = document.querySelector('.texture');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function getAge() {
   const dob = new Date(2007, 5, 10);
@@ -34,7 +36,7 @@ function populateAge() {
   const age = getAge();
   ageTargets.forEach((node) => {
     const type = node.getAttribute('data-age');
-    node.textContent = type === 'th' ? `${age} ปี` : `${age} years old`;
+    node.textContent = type === 'th' ? `${age} ปี` : `${age}`;
   });
 }
 
@@ -48,6 +50,20 @@ function setActiveNav() {
     } else {
       link.removeAttribute('aria-current');
     }
+  });
+}
+
+function setTextureVariant() {
+  if (!textureLayer) return;
+  const path = window.location.pathname.split('/').pop() || 'index.html';
+  const variants = { index: 'a', about: 'b', materials: 'c', ordering: 'b', contact: 'a', 'thank-you': 'c' };
+  const key = path.replace('.html', '');
+  const next = variants[key] || 'a';
+  textureLayer.setAttribute('data-variant', next);
+  textureLayer.animate([{ opacity: 0.06 }, { opacity: 0.1 }], {
+    duration: reduceMotion ? 1 : 280,
+    easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
+    fill: 'forwards'
   });
 }
 
@@ -99,10 +115,61 @@ function initContactForm() {
   });
 }
 
+function initPageTransition() {
+  document.body.classList.add('page-enter');
+  const internalLinks = document.querySelectorAll('a[href$=".html"], a[href="index.html"]');
+  internalLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || link.target === '_blank') return;
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('http')) return;
+      event.preventDefault();
+      if (reduceMotion) {
+        window.location.href = href;
+        return;
+      }
+      document.body.classList.add('page-leave');
+      setTimeout(() => {
+        window.location.href = href;
+      }, 190);
+    });
+  });
+}
+
+function initSectionReveal() {
+  const sections = document.querySelectorAll('.reveal-section');
+  sections.forEach((section) => {
+    const targets = section.querySelectorAll('h1, h2, h3, p, li, .btn, .card');
+    targets.forEach((node, index) => {
+      node.classList.add('reveal-item');
+      node.style.transitionDelay = `${Math.min(index * 40, 240)}ms`;
+    });
+  });
+
+  if (reduceMotion) {
+    sections.forEach((section) => section.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.18 });
+
+  sections.forEach((section) => observer.observe(section));
+}
+
 populateAge();
 setLanguage(localStorage.getItem('henri-lang') || 'th');
 setActiveNav();
+setTextureVariant();
 initContactForm();
+initPageTransition();
+initSectionReveal();
 
 toggle?.addEventListener('click', () => {
   setLanguage(root.classList.contains('lang-th') ? 'en' : 'th');
