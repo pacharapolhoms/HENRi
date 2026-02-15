@@ -90,6 +90,12 @@ nav a:focus-visible {
   color: var(--text);
 }
 
+nav a.is-active {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
 .lang-toggle {
   border: 1px solid var(--line);
   background: var(--paper);
@@ -190,6 +196,12 @@ form {
   display: grid;
   gap: 16px;
   max-width: 620px;
+}
+
+.form-note {
+  font-size: 15px;
+  color: var(--text-soft);
+  margin-top: 8px;
 }
 
 input,

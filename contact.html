@@ -39,25 +39,27 @@
       <div class="container">
         <h2 data-lang="th">ส่งข้อความถึงเรา</h2>
         <h2 data-lang="en">Send us a message</h2>
-        <form>
+        <form data-contact-form>
           <label>
             <span data-lang="th">ชื่อ</span>
             <span data-lang="en">Name</span>
-            <input type="text" />
+            <input name="name" type="text" required />
           </label>
           <label>
             <span data-lang="th">อีเมล</span>
             <span data-lang="en">Email</span>
-            <input type="email" />
+            <input name="email" type="email" required />
           </label>
           <label>
             <span data-lang="th">ข้อความ</span>
             <span data-lang="en">Message</span>
-            <textarea rows="5"></textarea>
+            <textarea name="message" rows="5" required></textarea>
           </label>
-          <button class="btn primary" type="button" data-lang="th">ส่งข้อความ</button>
-          <button class="btn primary" type="button" data-lang="en">Submit</button>
+          <button class="btn primary" type="submit" data-lang="th">ส่งข้อความทางอีเมล</button>
+          <button class="btn primary" type="submit" data-lang="en">Send via Email</button>
         </form>
+        <p class="form-note" data-contact-status data-lang="th">เมื่อกดส่ง ระบบจะเปิดแอปอีเมลพร้อมข้อความร่างอัตโนมัติ</p>
+        <p class="form-note" data-contact-status data-lang="en">Submitting opens your email app with a pre-filled message draft.</p>
       </div>
     </section>
   </main>
