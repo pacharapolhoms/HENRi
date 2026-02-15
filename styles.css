@@ -28,7 +28,7 @@ body {
   inset: 0;
   pointer-events: none;
   z-index: -2;
-  opacity: 0.08;
+  opacity: 0.1;
   background-image:
     radial-gradient(circle at 18% 24%, rgba(255, 255, 255, 0.85), transparent 38%),
     radial-gradient(circle at 78% 72%, rgba(232, 223, 207, 0.55), transparent 45%),
@@ -41,7 +41,7 @@ body {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(247, 244, 238, 0.82) 0%, rgba(247, 244, 238, 0.9) 100%);
+  background: linear-gradient(180deg, rgba(247, 244, 238, 0.8) 0%, rgba(247, 244, 238, 0.9) 100%);
 }
 
 .container {
@@ -106,7 +106,10 @@ nav a.is-active {
   font-size: 14px;
 }
 
-section { padding: 114px 0; }
+section {
+  padding: 114px 0;
+  background: linear-gradient(180deg, rgba(251, 248, 243, 0.24), rgba(247, 244, 238, 0.18));
+}
 
 .hero h1 {
   font-family: 'Noto Serif Thai', serif;
@@ -251,6 +254,6 @@ html.lang-en [data-lang='en'].i18n-inline {
   .container { width: min(calc(100% - 36px), var(--max)); }
   .topbar { align-items: flex-start; }
   section { padding: 88px 0; }
-  .hero h1 { font-size: clamp(54px, 13vw, 72px); }
+  .hero h1 { font-size: clamp(44px, 12vw, 52px); }
   h1 { font-size: clamp(36px, 8vw, 44px); }
 }
