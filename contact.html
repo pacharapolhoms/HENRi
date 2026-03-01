@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="th" class="lang-th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — HENRi</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="texture"></div>
+  <div class="page-overlay"></div>
+  <header>
+    <div class="container topbar">
+      <a class="brand" href="index.html">HENRi</a>
+      <nav>
+        <a href="index.html"><span class="i18n-inline" data-lang="th">หน้าแรก</span><span class="i18n-inline" data-lang="en">Home</span></a>
+        <a href="about.html"><span class="i18n-inline" data-lang="th">เกี่ยวกับ</span><span class="i18n-inline" data-lang="en">About</span></a>
+        <a href="materials.html"><span class="i18n-inline" data-lang="th">วัสดุและงานผลิต</span><span class="i18n-inline" data-lang="en">Materials & Craft</span></a>
+        <a href="ordering.html"><span class="i18n-inline" data-lang="th">การสั่งซื้อและจัดส่ง</span><span class="i18n-inline" data-lang="en">Ordering & Shipping</span></a>
+        <a href="contact.html"><span class="i18n-inline" data-lang="th">ติดต่อ</span><span class="i18n-inline" data-lang="en">Contact</span></a>
+      </nav>
+      <button class="lang-toggle" type="button">TH / EN</button>
+    </div>
+  </header>
+
+  <main data-page>
+    <section class="reveal-section">
+      <div class="container">
+        <h1 data-lang="th">ติดต่อ HENRi</h1>
+        <h1 data-lang="en">Contact HENRi</h1>
+        <p data-lang="th">หากต้องการสอบถามเรื่องไซซ์ วัสดุ หรือขั้นตอนการสั่งซื้อ ฝากข้อความไว้ได้เลย</p>
+        <p data-lang="en">If you’d like help with sizing, materials, or ordering, leave a message below.</p>
+        <p data-lang="th">เราจะตอบกลับทางอีเมลในเวลาทำการ</p>
+        <p data-lang="en">We’ll reply during business hours.</p>
+        <p data-lang="th">Email: henritradingplus@gmail.com</p>
+        <p data-lang="en">Email: henritradingplus@gmail.com</p>
+        <p><a href="https://instagram.com/henri.wearstore" target="_blank" rel="noopener noreferrer">IG: @henri.wearstore</a></p>
+      </div>
+    </section>
+
+    <section class="reveal-section">
+      <div class="container">
+        <h2 data-lang="th">ส่งข้อความถึงเรา</h2>
+        <h2 data-lang="en">Send us a message</h2>
+        <form
+          data-contact-form
+          action="https://formsubmit.co/henritradingplus@gmail.com"
+          method="POST"
+        >
+          <input type="hidden" name="_subject" value="HENRi Website Contact" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_next" value="thank-you.html" />
+
+          <label class="hp-field" aria-hidden="true">
+            <span>Website</span>
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" />
+          </label>
+
+          <label>
+            <span data-lang="th">ชื่อ</span>
+            <span data-lang="en">Name</span>
+            <input name="name" type="text" required />
+          </label>
+          <label>
+            <span data-lang="th">อีเมล</span>
+            <span data-lang="en">Email</span>
+            <input name="email" type="email" required />
+          </label>
+          <label>
+            <span data-lang="th">ข้อความ</span>
+            <span data-lang="en">Message</span>
+            <textarea name="message" rows="5" required></textarea>
+          </label>
+          <button class="btn primary" type="submit" data-lang="th">ส่งข้อความ</button>
+          <button class="btn primary" type="submit" data-lang="en">Submit</button>
+        </form>
+        <p class="form-note" data-contact-status data-lang="th">เมื่อกดส่ง ข้อความจะถูกส่งตรงเข้าสู่อีเมลร้านโดยไม่เปิดแอปอีเมลของคุณ</p>
+        <p class="form-note" data-contact-status data-lang="en">On submit, your message is delivered directly to our inbox without opening your email app.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">Copyright 2026 by HENRi WEAR Store</div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
